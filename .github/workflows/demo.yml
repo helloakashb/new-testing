@@ -1,4 +1,4 @@
-name: Deploy website with cache
+name: Deploy website with secrets
 on: workflow_dispatch
 
 jobs:
@@ -13,30 +13,8 @@ jobs:
         with:
             path: ~/.npm 
             key: ${{ runner.os }}-akashbiswas-${{ hashFiles('**/package-lock.json') }}
-
-      - name: Install dependencies
-        run: npm ci        # Use 'ci' for clean, reliable automated builds
-
-      - name: Build app
-        run: npm run build
       
       - name: access-secrets
         env:
           MY_SECRET: ${{ secrets.NAME }}
-        run: echo "Accessing secrets...$MY_SECRET"
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Cache node modules
-        uses: actions/cache@v4
-        with:
-            path: ~/.npm 
-            key: ${{ runner.os }}-akashbiswas-${{ hashFiles('**/package-lock.json') }}
-
-      - name: Install dependencies
-        run: npm ci
+        run: echo $MY_SECRET
