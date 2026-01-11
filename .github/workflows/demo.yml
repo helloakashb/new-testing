@@ -26,18 +26,3 @@ jobs:
           name: web-build
           path: dist/
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: web-build
-          path: ./dist
-
-      - name: Make deploy script executable
-        run: chmod +x ./deploy.sh
-
-      - name: Deploy
-        run: ./deploy.sh ./dist
