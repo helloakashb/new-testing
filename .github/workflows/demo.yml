@@ -19,6 +19,11 @@ jobs:
 
       - name: Build app
         run: npm run build
+      
+      - name: access-secrets
+        env:
+          MY_SECRET: ${{ secrets.NAME }}
+        run: echo "Accessing secrets...$MY_SECRET"
 
   deploy:
     needs: build
