@@ -5,18 +5,9 @@ jobs:
   build:
     strategy:
       matrix:
-        node-version: [16, 18]
+        node-version: [12, 18]
         operating-system: [ubuntu-latest, macos-latest]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: cache step
-        id: cache-step
-        uses: actions/cache@v4
-        with:
-            path: ~/.npm 
-            key: ${{ runner.os }}-akashbiswas-${{ hashFiles('**/package-lock.json') }}
-      - name: install dependencies
-        if: steps.cache-step.outputs.cache-hit != 'true'
-        run: npm ci
