@@ -12,8 +12,7 @@ jobs:
      steps:
        - name: Checkout code
          uses: actions/checkout@v4
-       - name: failure-step
-         run: exit 1
+
   report:
      needs: [build,test]
      if: failure()
