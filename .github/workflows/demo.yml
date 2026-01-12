@@ -1,21 +1,23 @@
-name: Deploy website with secrets
+name: Conditional-functions
 on: workflow_dispatch
 
 jobs:
   build:
-    environment: secrets-test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Cache node modules
-        uses: actions/cache@v4
-        with:
-            path: ~/.npm 
-            key: ${{ runner.os }}-akashbiswas-${{ hashFiles('**/package-lock.json') }}
-      
-      - name: access-secrets
-        env:
-          MY_SECRET: ${{ secrets.NAME }}
-        run: echo $MY_SECRET
+  test:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Checkout code
+         uses: actions/checkout@v4
+       - name: failure-step
+         run: exit 1
+  report:
+     needs: [build,test]
+     if: failure()
+     runs-on: ubuntu-latest
+     steps:
+      - name: Report step
+        run: echo 'Now this report job is running' 
