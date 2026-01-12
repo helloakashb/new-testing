@@ -7,11 +7,13 @@ jobs:
       matrix:
         node-version: [12, 18]
         operating-system: [ubuntu-latest, macos-latest]
+        exclude:
+          - node-version: 12
+            operating-system: macos-latest
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: install dependencies
         run: npm install
-      - name: Return error
-        run: exit 1
+
