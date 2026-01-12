@@ -13,3 +13,5 @@ jobs:
         uses: actions/checkout@v4
       - name: install dependencies
         run: npm install
+      - name: Return error
+        run: exit 1
