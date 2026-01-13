@@ -1,0 +1,10 @@
+name: custom-action-workflow
+on: workflow_dispatch
+jobs:
+  job_1:
+     runs-on: ubuntu-latest
+     steps:
+        - name: my-custom-action
+          uses: ./.github/actions/action.yml
+        - name: show message
+          run: echo "custom action running"

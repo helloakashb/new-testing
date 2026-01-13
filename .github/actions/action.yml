@@ -1,0 +1,20 @@
+name: 'Setup and Test'
+description: 'Standardized node setup and test run'
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+    - name: Setup Node
+      run: echo "Setting up Node.js version ${{ inputs.node-version }}"
+      shell: bash
+    - name: Install Dependencies
+      run: npm ci
+      shell: bash # MANDATORY: Every 'run' in a composite action needs a shell
+
+    - name: Run Tests
+      id: run-tests
+      run: ${{ inputs.test-command }}
+      shell: bash
