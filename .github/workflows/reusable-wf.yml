@@ -1,0 +1,17 @@
+name: Reusable Workflow
+on:
+  workflow_call:
+    inputs:
+      target_env:
+        type: string
+        required: true
+    secrets:
+      API_TOKEN:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print-message
+        run: echo "this is a reusable workflow for ${{ inputs.target_env }} environment"
