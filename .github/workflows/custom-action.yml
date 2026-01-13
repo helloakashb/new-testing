@@ -4,7 +4,9 @@ jobs:
   job_1:
      runs-on: ubuntu-latest
      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
         - name: my-custom-action
-          uses: ./.github/actions/action.yml
+          uses: ./.github/actions/custom-action
         - name: show message
           run: echo "custom action running"
