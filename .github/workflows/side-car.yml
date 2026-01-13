@@ -15,6 +15,9 @@ jobs:
         image: redis:7
         # Note: 'ports' mapping is NOT required when the job runs in a container
 
+      caching-server: # This label becomes the HOSTNAME
+        image: kakfa:latest
+        # Note: 'ports' mapping is NOT required when the job runs in a container
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

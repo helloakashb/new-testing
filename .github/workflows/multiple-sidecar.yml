@@ -1,0 +1,35 @@
+name: Multi-Sidecar Example Workflow
+on: workflow_dispatch
+jobs:
+  test-with-services:
+    runs-on: ubuntu-latest
+    # The main job will run inside this container
+    container:
+      image: node:20-alpine
+    # Define the service containers (sidecars)
+    services:
+      # Sidecar 1: PostgreSQL
+      postgres:
+        image: postgres:13
+        ports:
+          # Maps the container port 5432 to a dynamically assigned host port
+          - 5432:5432
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: testdb
+
+      # Sidecar 2: Redis
+      redis:
+        image: redis:6-alpine
+        ports:
+          # Maps the container port 6379 to a dynamically assigned host port
+          - 6379:6379
+
+    # Steps in the main job container
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: run command
+      run: echo "Multiple side-car containers are used here"
