@@ -1,0 +1,26 @@
+name: Container and Service Example
+on: workflow_dispatch
+
+jobs:
+  integration-test:
+    runs-on: ubuntu-latest
+    
+    # 1. THE JOB CONTAINER (Where your code runs)
+    container:
+      image: node:20-bullseye
+
+    # 2. THE SERVICE CONTAINER (Sidecar)
+    services:
+      cache-server: # This label becomes the HOSTNAME
+        image: redis:7
+        # Note: 'ports' mapping is NOT required when the job runs in a container
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm install redis
+
+      - name: Connect to Service
+        run: echo "Both containers running inside the same runner"
