@@ -15,4 +15,4 @@ jobs:
         needs: job1
         steps:
             - name: get output-value
-              run: echo "the name is ${{needs.job1.outputs.example_output.Name}}"
+              run: echo "the name is ${{needs.job1.outputs.example_output}}"
