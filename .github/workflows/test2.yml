@@ -18,6 +18,7 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                   name: test-artifact
+                  path: build/
     
     test:
         runs-on: ubuntu-latest
@@ -27,3 +28,4 @@ jobs:
               uses: actions/download-artifact@v4
               with:
                   name: test-artifact
+                  path: ./build
