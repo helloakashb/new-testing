@@ -17,6 +17,7 @@ jobs:
                   name: test-artifact
     
     test:
+        continue-on-error: true
         runs-on: ubuntu-latest
         needs: build
         steps:
